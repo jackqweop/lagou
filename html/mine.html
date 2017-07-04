@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <link href="//www.lgstatic.com/m/css/dep/normalize.css-3.0.2/normalize.css?v=201706062006" rel="stylesheet">
+    <link rel="Shortcut Icon" href="//www.lgstatic.com/m/images/asset/common/img/favicon.ico?v=201706062006">
+    <link href="//www.lgstatic.com/m/css/asset/center/mine/css/mine.css?v=201706062006" rel="stylesheet">
+    <link rel="stylesheet" href="../dist/style/weui.css">
+    <style>
+    .weui-tabbar {
+        position: fixed;
+    }
+    #tuichu{
+        width: 40px;
+        height: 20px;
+        background-color: green;
+        display: inline-block;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <header id="header">拉勾网</header>
+    <form id="uploadForm">
+        <input type="file" name="logo" onchange="doUpload()" multiple="multiple" />
+    </form>
+    <div id="content">
+        <div class="logininfo">
+            <!-- 未登录 -->
+            <div class="nologin center" id="msg">
+                <a class="loginbut" href="login.html" target="_self">登录 / 注册</a>
+            </div>
+        </div>
+        <!-- 登录地址-->
+        <div class="buttons">
+            <a class="button deliver" href="#">
+                <span>投递</span>
+            </a>
+            <a class="button interview" href="#">面试</a>
+            <a class="button invitation" href="#">
+                <span>邀约</span>
+            </a>
+            <a class="button collect" href="#">收藏</a>
+        </div>
+    </div>
+    <div class="weui-tab">
+        <div class="weui-tab__panel">
+        </div>
+        <div class="weui-tabbar">
+            <a href="../index.html" class="weui-tabbar__item">
+                <span class="icon" style="background: url(../img/icon2.png) no-repeat -32px -2.5px;background-size: 250px 250px;"></span>
+                <span class="weui-tabbar__label">职位</span>
+            </a>
+            <a href="javascript:;" class="weui-tabbar__item">
+                <span class="icon" style="background: url(../img/icon2.png) no-repeat -14px -2.5px;background-size: 250px 250px;"></span>
+                <span class="weui-tabbar__label">搜索</span>
+            </a>
+            <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+                <span class="icon" style="background: url(../img/icon2.png) no-repeat -52.5px -2px;background-size: 250px 250px;"></span>
+                <span class="weui-tabbar__label">我的</span>
+            </a>
+        </div>
+    </div>
+</body>
+<script src="../lib/jquery-3.2.1.js"></script>
+<!-- <script src="../js/com.js"></script> -->
+<script>
+var msg = document.getElementById('msg');
+
+// 读取cookie
+var cookies = document.cookie;
+
+if (cookies) {
+    var arr = cookies.split('; ');
+
+    arr.forEach(function(item) {
+        var temp = item.split('=');
+        if (temp[0] === 'phonenumber') {
+            msg.innerHTML = '<div class="haslogin center"><div class="headcon"><img class="headpic" src="//www.lgstatic.com/images/myresume/default_headpic.png"></div><div class="name">' + temp[1] + '</div></div>' + '<a href="#" id="tuichu">退出</a>'
+        }
+    });
+
+}
+
+
+var tui = document.getElementById('tuichu');
+tui.onclick = function() {
+    var now = new Date();
+    now.setDate(now.getDate() - 9);
+    console.log(now);
+    document.cookie = "phonenumber=ad0;expires=" + now + ";path=/";
+    document.cookie = "password=admin;expires=" + now + ";path=/";
+
+}
+
+msg.onclick = function(e) {
+    e = e || window.event;
+    var target = e.target || e.srcElement;
+
+    if (target.tagName.toLowerCase() === 'a') {
+        var now = new Date('2017-5-9');
+
+        document.cookie = 'phonenumber=null;expires=' + now.toUTCString();
+
+        location.href = 'http://10.3.137.206:80/project3/6.20/6.26/html/mine.html';
+    }
+}
+
+function doUpload() {
+    console.log("abc")
+    $.ajax({
+        url: 'http://10.3.137.206:12345/upload-single',
+        type: 'POST',
+        cache: false, //不必须
+        data: new FormData($('#uploadForm')[0]),
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            console.log(data)
+            $(".headpic").attr("src", "http://10.3.137.206:80/project3/6.20/6.26/api/uploads/" + data.imgInfo[0].filename)
+        }
+    })
+}
+</script>
+
+</html>

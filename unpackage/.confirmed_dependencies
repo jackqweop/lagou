@@ -1,0 +1,90 @@
+{
+  "index.html": {
+    "resources": [
+      "lib/jquery.lazyload.js",
+      "css/base.css",
+      "lib/unslider.js",
+      "img/ban3.jpg",
+      "lib/com.js",
+      "css/img/prev-btn.png",
+      "css/index.css",
+      "img/gg2.jpg",
+      "css/img/sg.png",
+      "img/ban2.jpg",
+      "css/common.css",
+      "img/gg1.jpg",
+      "img/solgan.png",
+      "css/img/arrow-down.png",
+      "css/img/next-btn.png",
+      "css/img/ico.png",
+      "lib/jquery-3.2.1.js",
+      "css/img/sina.png",
+      "css/img/siash.png",
+      "img/ban1.jpg",
+      "js/config.js",
+      "js/index.js",
+      "img/zol-logo.png",
+      "img/zolDingYue.jpg",
+      "js/require.js",
+      "html/reg.html",
+      "html/login.html",
+      "lib/swiper.js",
+      "img/icon2.png",
+      "dist/style/weui.css",
+      "img/bn3.JPG",
+      "img/bn1.PNG",
+      "css/swiper.css",
+      "html/datapage.html",
+      "img/bn2.JPG",
+      "html/mine.html"
+    ],
+    "refer": [
+      "html/reg.html",
+      "html/login.html",
+      "html/datapage.html",
+      "html/mine.html"
+    ]
+  },
+  "html/reg.html": {
+    "resources": [
+      "js/login.js",
+      "html/login.html",
+      "img/shop_182x60.png",
+      "lib/jquery-3.2.1.js",
+      "js/config.js",
+      "css/img/bg.png",
+      "css/login1.css",
+      "index.html"
+    ],
+    "refer": [
+      "html/login.html",
+      "index.html"
+    ]
+  },
+  "html/login.html": {
+    "resources": [
+      "html/reg.html",
+      "img/ad2_1.jpg",
+      "api/login.php",
+      "lib/jquery-3.2.1.js",
+      "css/img/bgs2.png",
+      "js/login.js",
+      "img/shop_182x60.png",
+      "js/config.js",
+      "css/img/bg.png",
+      "css/login1.css"
+    ],
+    "refer": [
+      "html/reg.html"
+    ]
+  },
+  "html/mine.html": {
+    "resources": [
+      "html/login.html",
+      "dist/style/weui.css"
+    ],
+    "refer": [
+      "html/login.html"
+    ]
+  }
+}

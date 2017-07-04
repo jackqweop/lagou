@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="//img.lagou.com/passport/static/mobile/modules/common/main_e3976ca.css">
+</head>
+
+<body class="radial">
+    <div class="new_wrapper">
+        <form id="registerForm" data-view="phoneRegister">
+            <div class="new_register">
+                <input type="hidden" id="otype" value="">
+                <div data-propertyname="phone" data-controltype="Phone" style="display: block;">
+                    <input type="text" placeholder="手机号" class="border_btm r_phone top btm">
+                </div>
+                <!-- <div id="vcodeWrap" data-propertyname="request_form_verifyCode" data-controltype="VerifyCode" style="display: block;">
+                <input type="text" id="vcode" name="vcode" tabindex="3" class="top btm" placeholder="请证明你不是机器人"><img class="yzm" src="https://passport.lagou.com/vcode/create?from=register&amp;refresh=1498555938308">
+                
+                <a>看不清楚，<em>换一张</em></a>   
+                <span class="error" style="display:none;" id="vcodeError"></span>
+            </div>
+            <div data-propertyname="phoneVerificationCode" data-controltype="PhoneVerificationCode" style="display: block;">
+                <input type="text" tabindex="2" class="top btm" id="vcode" placeholder="短信验证码" style="margin-top: 0;border-top-left-radius: 0;border-top-right-radius: 0;">
+                <input type="button" class="btn_active r_getVcode btn_disabled" value="获取">
+            </div> -->
+            </div>
+            <div class="reg_pwd" data-propertyname="password" data-controltype="Password" style="display: block;">
+                <div>
+                    <input type="password" class="r_psw" placeholder="设置6-16位密码" maxlength="16">
+                    <i class="eye"></i>
+                </div>
+            </div>
+            <!-- 验证码 -->
+            <!-- 验证码 -->
+            <div data-propertyname="submit" data-controltype="Botton" style="display: block;">
+                <input type="button" class="btn_green" id="register" value="注册">
+            </div>
+        </form>
+        <div class="register_text">已有帐号？</div>
+        <a href="./login.html" class="btn_green_border">登录</a>
+        <div class="register_text">点击注册，即代表您同意<a href="http://www.lagou.com/privacy.html" target="_blank">《拉勾用户协议》</a></div>
+    </div>
+</body>
+<script src="../lib/jquery-3.2.1.js"></script>
+<script>
+$('.btn_green').on('click', function() {
+    $.ajax({
+        type: "get",
+        url: "http://10.3.137.206:12345/zhuce",
+        data: {
+            phonenumber: $('.r_phone').val(),
+            password: $('.r_psw').val()
+        },
+        success: function(res) {
+            console.log(res);
+            if (res == 'ok') {
+                alert('注册成功');
+            } else if (res == 'no') {
+                alert('注册失败');
+            }
+        }
+    })
+})
+</script>
+
+</html>

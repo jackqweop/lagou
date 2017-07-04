@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="//img.lagou.com/passport/static/mobile/modules/common/main_e3976ca.css">
+</head>
+<body class="radial">
+<input type="hidden" value="" id="isVisiable_request_form_verifyCode">
+	<div class="new_wrapper">
+	    <form data-view="loginView">
+	    	<div class="new_register">
+	    		<div data-propertyname="username" data-controltype="Phone" style="display: block;">
+	    			<input type="text" placeholder="已验证手机/邮箱" class="border_btm r_phone r_email top" id="phonenumber">
+	    		</div>
+	    		<div data-propertyname="password" data-controltype="Password" style="display: block;">
+					<div>
+						<input type="password" placeholder="密码" class="r_psw btm" maxlength="16" id="password">
+						<i class="eye"></i>
+					</div>
+	    			
+	    		</div>
+	    		
+	    	</div>
+	    	<!-- 验证码 -->
+	        <div id="vcodeWrap" data-propertyname="request_form_verifyCode" data-controltype="VerifyCode" style="display:none;">
+	            <input type="text" id="vcode" name="vcode" tabindex="3" placeholder="请证明你不是机器人">
+	            <img src="" width="113" height="42" id="vcodeImg">
+	            <a>看不清楚，<em>换一张</em></a>   
+	            <!-- <span class="error" style="display:none;" id="vcodeError"></span> -->
+	        </div>
+	        <!-- 验证码 -->
+	    	<div data-propertyname="submit" data-controltype="Botton" style="display: block;">
+	    		<input type="button" class="btn_green" value="登录" id="btnLogin">
+	    	</div>
+	    	
+	    </form>
+	    <div class="register_text">还没帐号？</div>
+	    <a href="reg.html" class="btn_green_border">注册</a>
+	</div><!--拉勾UI框架 --><!-- analytics js file -->
+</body>
+<script src="../lib/jquery-3.2.1.js"></script>
+<script>
+	$('.btn_green').on('click', function() {
+	    $.ajax({
+	        type: "get",
+	        url: "http://10.3.137.206:12345/denglu",
+	        data: {
+	            phonenumber: $('.r_phone').val(),
+	            password: $('.r_psw').val()
+	        },
+	        success: function(res) {
+	            console.log(res);
+	            if (res == 'ok') {
+	                window.location.href='http://10.3.137.206:80/project3/6.20/6.26/html/mine.html?phonenumber='+$('.r_phone').val();
+	            } else if (res == 'no') {
+	                alert('登录失败');
+	            }
+	        }
+	    })
+	})
+
+		var phonenumber = document.getElementById('phonenumber');
+        var password = document.getElementById('password');
+        var btnLogin = document.getElementById('btnLogin');
+        // var check = document.getElementById('check');
+
+        btnLogin.onclick = function() {
+            var _phonenumber = phonenumber.value;
+            var _psw = password.value;
+
+            var str1 = 'phonenumber=' + _phonenumber;
+            var str2 = 'password=' + _psw;
+            // if (check.checked) {
+            //     var now = new Date();
+            //     now.setDate(now.getDate() + 7);
+
+            //     // 有效期1分钟
+            //     // now.setMinutes(now.getMinutes()+1);
+
+            //     str1 += ';expires=' + now.toUTCString();
+            //     str2 += ';expires=' + now.toUTCString();
+            // }
+
+            // 把用户名和密码存入cookie
+            document.cookie = str1+";path=/";
+            document.cookie = str2+";path=/";
+
+            //location.href = 'http://localhost/myproject/src/index.html';
+        }
+</script>
+</html>

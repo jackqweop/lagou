@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<input type="text" placeholder="查询ID" class="inp"><button class="btn">查询</button>
+	<div class="test">
+		
+	</div>
+</body>
+<script src="../jquery-3.2.1.js"></script>
+	<script>
+		function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    console.log(GetQueryString("id"))
+    $('.btn').on("click",function(){
+    	$.ajax({
+	        type: 'post',
+	        url: 'http://localhost:8888/fwb',
+	        data: {
+	            id: $('.inp').val(),
+	        },
+	        async: true,
+	        dataType: 'json',
+	        success: function(data) {
+	            var fwb = data.fwb[0];
+	            var imghtml = ` 
+					${fwb.ued}
+	            `;
+	            $('.test').html(imghtml)
+	        }
+	    }) 
+    })
+	           
+	</script>
+</html>
